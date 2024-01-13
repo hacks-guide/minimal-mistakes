@@ -445,6 +445,21 @@
     color: inherit;
   }
 
+/* hacks-guide change start: Add progress table */
+  ol {
+    padding-left: 0.9rem;
+  }
+
+  li {
+    list-style: inherit;
+  }
+
+  .completed {
+    color: $gray;
+    text-decoration: line-through;
+  }
+/* hacks-guide change end */
+
   .active {
     margin-left: -0.5em;
     padding-left: 0.5em;
