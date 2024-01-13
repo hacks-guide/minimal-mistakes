@@ -191,6 +191,8 @@
       color: $masthead-link-color-hover;
     }
 
+/* hacks-guide change start: disable site logo, site title */
+    /*
     &.site-logo {
       margin-left: 0;
       margin-right: 0.5rem;
@@ -199,6 +201,8 @@
     &.site-title {
       margin-left: 0;
     }
+    */
+/* hacks-guide change end */
   }
 
   img {
