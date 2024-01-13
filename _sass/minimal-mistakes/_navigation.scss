@@ -216,6 +216,18 @@
     cursor: pointer;
   }
 
+/* hacks-guide change start: add language selector */
+  &__toggle_lang {
+    -ms-flex-item-align: center;
+    align-self: center;
+    height: $nav-toggle-height;
+    border: 0;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+/* hacks-guide change end */
+
   .visible-links {
     display: -webkit-box;
     display: -ms-flexbox;

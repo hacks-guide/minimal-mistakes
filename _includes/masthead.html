@@ -16,12 +16,24 @@
       -->
 <!-- hacks-guide change end -->
         <ul class="visible-links">
-          {%- for link in site.data.navigation.main -%}
-            <li class="masthead__menu-item">
-              <a href="{{ link.url | relative_url }}"{% if link.description %} title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
-            </li>
-          {%- endfor -%}
-        </ul>
+<!-- hacks-guide change start: multi-language configuration -->
+          {% assign split_path = page.path | split: "/" %}
+          {% assign locale = split_path[1] %}
+          {% assign titles = site.data.navigation[locale].main %}
+          {% if locale == 'en_US' %}
+            {% assign locale_var = '/' %}
+          {% else %}
+            {% assign locale_var = locale | prepend:'/' | append:'/' %}
+          {% endif %}
+
+          {% for link in site.data.navigation[locale].main %}
+            {% if link.url == "/" %}
+              <li class="masthead__menu-item masthead__menu-item--lg"><a href="{{ domain }}{{ locale_var }}">{{ link.title }}</a></li>
+            {% else %}
+              <li class="masthead__menu-item"><a href="{{ domain }}{{ locale_var }}{{ link.url }}">{{ link.title }}</a></li>
+            {% endif %}
+          {% endfor %}
+<!-- hacks-guide change end -->
         {% if site.search == true %}
         <button class="search__toggle" type="button">
           <span class="visually-hidden">{{ site.data.ui-text[site.locale].search_label | default: "Toggle search" }}</span>

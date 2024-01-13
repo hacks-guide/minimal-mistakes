@@ -46,6 +46,24 @@ layout: default
             </nav>
           </aside>
         {% endif %}
+<!-- hacks-guide change start -->
+        <hr>
+
+        {% assign split_path = page.path | split: "/" %}
+        {% assign locale = split_path[1] %}
+
+        {% for link in site.data.navigation[locale].bottom %}
+          {% if link.url contains 'http' %}
+            {% assign domain = '' %}
+          {% else %}
+            {% assign domain = site.url | append: site.baseurl %}
+          {% endif %}
+          <div class ="notice"><b>{{ link.title }}</b></div>
+        {% endfor %}
+
+        <hr>
+<!-- hacks-guide change end -->
+
         {{ content }}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
