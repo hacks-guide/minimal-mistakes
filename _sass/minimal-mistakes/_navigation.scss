@@ -236,9 +236,11 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
+/* hacks-guide change start: s/end/start */
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+/* hacks-guide change end */
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
@@ -338,6 +340,13 @@
       }
     }
   }
+
+/* hacks-guide change start: adjust links-menu position */
+  .links-menu {
+    right: 2rem;
+  }
+/* hacks-guide change end */
+
 }
 
 .no-js {
