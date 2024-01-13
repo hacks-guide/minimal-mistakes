@@ -3,7 +3,7 @@ require "json"
 package_json = JSON.parse(File.read("package.json"))
 
 Gem::Specification.new do |spec|
-  spec.name                    = "minimal-mistakes-jekyll"
+  spec.name                    = "minimal-mistakes-hacks-guide"
   spec.version                 = package_json["version"]
   spec.authors                 = ["Michael Rose", "iBug"]
 
