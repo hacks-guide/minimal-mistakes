@@ -476,12 +476,14 @@
   }
 /* hacks-guide change end */
 
+/* hacks-guide change start: disable padding on active */
   .active {
-    margin-left: -0.5em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    // margin-left: -0.5em;
+    // padding-left: 0.5em;
+    // padding-right: 0.5em;
     font-weight: bold;
   }
+/* hacks-guide change end */
 
   @include breakpoint(max-width $large - 1px) {
     position: relative;
