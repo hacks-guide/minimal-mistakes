@@ -4,15 +4,19 @@ Licensed under the MIT license - http://opensource.org/licenses/MIT
 Copyright (c) 2015 Luke Jackson http://lukejacksonn.com
 */
 
+/* hacks-guide change: add language selector, remove logo */
+
 $(function() {
 
   var $btn = $("nav.greedy-nav .greedy-nav__toggle");
+  var $btn2 = $("nav.greedy-nav .greedy-nav__toggle_lang");
   var $vlinks = $("nav.greedy-nav .visible-links");
-  var $hlinks = $("nav.greedy-nav .hidden-links");
+  var $hlinks = $("nav.greedy-nav .hidden-links.links-menu");
+  var $hlinks2 = $("nav.greedy-nav .hidden-links.lang-menu");
   var $nav = $("nav.greedy-nav");
-  var $logo = $('nav.greedy-nav .site-logo');
+  // var $logo = $('nav.greedy-nav .site-logo');
   var $logoImg = $('nav.greedy-nav .site-logo img');
-  var $title = $("nav.greedy-nav .site-title");
+  // var $title = $("nav.greedy-nav .site-title");
   var $search = $('nav.greedy-nav button.search__toggle');
 
   var numOfItems, totalSpace, closingTime, breakWidths;
@@ -52,7 +56,7 @@ $(function() {
   // Set the last measured CSS width breakpoint: 0: <768px, 1: <1024px, 2: < 1280px, 3: >= 1280px.
   var lastBreakpoint = winWidth < 768 ? 0 : winWidth < 1024 ? 1 : winWidth < 1280 ? 2 : 3;
 
-  var availableSpace, numOfVisibleItems, requiredSpace, timer;
+  var availableSpace, numOfVisibleItems, requiredSpace, timer, timer2;
 
   function check() {
 
@@ -68,10 +72,11 @@ $(function() {
     numOfVisibleItems = $vlinks.children().length;
     // Decrease the width of visible elements from the nav innerWidth to find out the available space for navItems
     availableSpace = /* nav */ $nav.innerWidth()
-                   - /* logo */ ($logo.length !== 0 ? $logo.outerWidth(true) : 0)
-                   - /* title */ $title.outerWidth(true)
+                   - /* logo */ // ($logo.length !== 0 ? $logo.outerWidth(true) : 0)
+                   - /* title */ // $title.outerWidth(true)
                    - /* search */ ($search.length !== 0 ? $search.outerWidth(true) : 0)
-                   - /* toggle */ (numOfVisibleItems !== breakWidths.length ? $btn.outerWidth(true) : 0);
+                   - /* toggle */ (numOfVisibleItems !== breakWidths.length ? $btn.outerWidth(true) : 0)
+                   - /* toggle-lang */ ($btn2.outerWidth(true));
     requiredSpace = breakWidths[numOfVisibleItems - 1];
 
     // There is not enought space
@@ -98,9 +103,17 @@ $(function() {
   });
 
   $btn.on('click', function() {
-    $hlinks.toggleClass('hidden');
-    $(this).toggleClass('close');
-    clearTimeout(timer);
+    if($hlinks.is(":visible")){
+      $hlinks.addClass('hidden');
+      $(this).removeClass('close');
+      clearTimeout(timer);
+    } else {
+      $hlinks.removeClass('hidden');
+      $(this).addClass('close');
+      $hlinks2.addClass('hidden');
+      $btn2.removeClass('close');
+      clearTimeout(timer);
+    }
   });
 
   $hlinks.on('mouseleave', function() {
@@ -111,6 +124,30 @@ $(function() {
   }).on('mouseenter', function() {
     // Mouse is back, cancel the timer
     clearTimeout(timer);
+  })
+
+  $btn2.on('click', function() {
+    if($hlinks2.is(":visible")){
+      $hlinks2.addClass('hidden');
+      $(this).removeClass('close');
+      clearTimeout(timer2);
+    } else {
+      $hlinks2.removeClass('hidden');
+      $(this).addClass('close');
+      $hlinks.addClass('hidden');
+      $btn.removeClass('close');
+      clearTimeout(timer2);
+    }
+  });
+
+  $hlinks2.on('mouseleave', function() {
+    // Mouse has left, start the timer
+    timer2 = setTimeout(function() {
+      $hlinks2.addClass('hidden');
+    }, closingTime);
+  }).on('mouseenter', function() {
+    // Mouse is back, cancel the timer
+    clearTimeout(timer2);
   })
 
   // check if page has a logo
