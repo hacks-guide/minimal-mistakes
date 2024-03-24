@@ -37,7 +37,9 @@
       {% endif %}
       {% include page__meta.html %}
       {% if page.header.cta_url %}
-        <p><a href="{{ page.header.cta_url | relative_url }}" class="btn btn--light-outline btn--large">{{ page.header.cta_label | default: site.data.ui-text[site.locale].more_label | default: "Learn More" }}</a></p>
+<!-- hacks-guide change start: fix cta_url in translations always linking to root of site -->
+        <p><a href="{{ page.header.cta_url }}" class="btn btn--light-outline btn--large">{{ page.header.cta_label | default: site.data.ui-text[site.locale].more_label | default: "Learn More" }}</a></p>
+<!-- hacks-guide change end -->
       {% endif %}
       {% if page.header.actions %}
         <p>
