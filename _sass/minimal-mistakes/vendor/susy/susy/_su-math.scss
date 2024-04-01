@@ -90,7 +90,10 @@
   @if unitless($span-width) {
     $container-spread: su-valid-spread($container-spread);
     $container: _su-sum($columns, $gutters, $container-spread, $validate: false);
-    @return percentage($span-width / $container);
+
+    /* hacks-guide change start: fix Dart Sass deprecation warning */
+    @return percentage(calc($span-width / $container));
+    /* hacks-guide change end */
   }
 
   @return $span-width;
@@ -141,7 +144,10 @@
   }
 
   $container: _su-sum($columns, $gutters, $container-spread);
-  @return percentage($gutters / $container);
+
+  /* hacks-guide change start: fix Dart Sass deprecation warning */
+  @return percentage(calc($gutters / $container));
+  /* hacks-guide change end */
 }
 
 

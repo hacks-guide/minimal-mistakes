@@ -24,9 +24,11 @@ form {
     white-space: normal;
   }
 
+  /* hacks-guide change start: fix Dart Sass deprecation warning */
   p {
-    margin-bottom: (5px / 2);
+    margin-bottom: calc(5px / 2);
   }
+  /* hacks-guide change end */
 
   ul {
     list-style-type: none;

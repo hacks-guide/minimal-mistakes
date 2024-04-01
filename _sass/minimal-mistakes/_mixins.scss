@@ -65,7 +65,9 @@
   $green: green($color);
   $blue: blue($color);
 
-  $yiq: (($red*299)+($green*587)+($blue*114))/1000;
+  /* hacks-guide change start: fix Dart Sass deprecation warning */
+  $yiq: calc(((($red * 299) + ($green * 587)) + ($blue * 114))/1000);
+  /* hacks-guide change end */
 
   @if $yiq-debug { @debug $yiq, $threshold; }
 

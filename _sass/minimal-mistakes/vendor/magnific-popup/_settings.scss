@@ -28,7 +28,9 @@ $mfp-include-iframe-type:             true;                       // Enable Ifra
 $mfp-iframe-padding-top:              40px;                       // Iframe padding top
 $mfp-iframe-background:               #000;                       // Background color of iframes
 $mfp-iframe-max-width:                900px;                      // Maximum width of iframes
-$mfp-iframe-ratio:                    9/16;                       // Ratio of iframe (9/16 = widescreen, 3/4 = standard, etc.)
+/* hacks-guide change start: fix Dart Sass deprecation warning */
+$mfp-iframe-ratio:                    calc(9 / 16);               // Ratio of iframe (9/16 = widescreen, 3/4 = standard, etc.)
+/* hacks-guide change end*/
 
 // Image-type options
 $mfp-include-image-type:              true;                       // Enable Image-type popups
